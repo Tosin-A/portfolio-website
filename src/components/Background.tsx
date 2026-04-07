@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 export default function Background() {
   const glowRef = useRef<HTMLDivElement>(null);
@@ -10,8 +10,8 @@ export default function Background() {
       el.style.left = `${e.clientX}px`;
       el.style.top = `${e.clientY}px`;
     };
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
+    window.addEventListener('mousemove', onMove);
+    return () => window.removeEventListener('mousemove', onMove);
   }, []);
 
   return (

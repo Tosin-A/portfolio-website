@@ -1,24 +1,31 @@
-import { useEffect, useMemo, useState } from "react";
-import { projects, type Project, type ProjectCategory } from "../data/projects";
+import { useEffect, useMemo, useState } from 'react';
+import { projects, type Project, type ProjectCategory } from '../data/projects';
 
-const FILTERS: ("All" | ProjectCategory)[] = ["All", "AI", "SaaS", "Mobile", "Tools"];
+const FILTERS: ('All' | ProjectCategory)[] = [
+  'All',
+  'AI',
+  'SaaS',
+  'Mobile',
+  'Tools',
+];
 
 export default function Projects() {
   const [active, setActive] = useState<Project | null>(null);
-  const [filter, setFilter] = useState<"All" | ProjectCategory>("All");
+  const [filter, setFilter] = useState<'All' | ProjectCategory>('All');
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setActive(null);
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setActive(null);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = active ? "hidden" : "";
+    document.body.style.overflow = active ? 'hidden' : '';
   }, [active]);
 
   const visible = useMemo(
-    () => (filter === "All" ? projects : projects.filter((p) => p.category === filter)),
+    () =>
+      filter === 'All' ? projects : projects.filter(p => p.category === filter),
     [filter]
   );
 
@@ -43,7 +50,7 @@ export default function Projects() {
         </div>
 
         <div className="flex flex-wrap gap-2 mb-10 reveal">
-          {FILTERS.map((f) => {
+          {FILTERS.map(f => {
             const isActive = filter === f;
             return (
               <button
@@ -51,8 +58,8 @@ export default function Projects() {
                 onClick={() => setFilter(f)}
                 className={`text-xs font-mono px-3 py-1.5 rounded-full border transition-all ${
                   isActive
-                    ? "border-accent bg-accent/10 text-accent shadow-glow"
-                    : "border-white/10 text-ink-dim hover:border-accent/50 hover:text-ink"
+                    ? 'border-accent bg-accent/10 text-accent shadow-glow'
+                    : 'border-white/10 text-ink-dim hover:border-accent/50 hover:text-ink'
                 }`}
               >
                 {f}
@@ -68,9 +75,11 @@ export default function Projects() {
               onClick={() => setActive(p)}
               role="button"
               tabIndex={0}
-              onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setActive(p)}
-              className="reveal group relative cursor-pointer glass-card p-7 hover:-translate-y-1 hover:shadow-glow focus:outline-none focus:border-accent overflow-hidden"
-              style={{ transitionDelay: `${i * 60}ms` }}
+              onKeyDown={e =>
+                (e.key === 'Enter' || e.key === ' ') && setActive(p)
+              }
+              className="group relative cursor-pointer glass-card p-7 hover:-translate-y-1 hover:shadow-glow focus:outline-none focus:border-accent overflow-hidden animate-fade-up"
+              style={{ animationDelay: `${i * 60}ms` }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-accent/0 via-accent/0 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
@@ -80,9 +89,14 @@ export default function Projects() {
                     {p.category}
                   </div>
                   <h3 className="text-xl font-semibold text-ink">{p.title}</h3>
-                  <p className="text-xs text-accent mt-1 font-mono">{p.tagline}</p>
+                  <p className="text-xs text-accent mt-1 font-mono">
+                    {p.tagline}
+                  </p>
                 </div>
-                <div className="flex gap-2 text-ink-dim" onClick={(e) => e.stopPropagation()}>
+                <div
+                  className="flex gap-2 text-ink-dim"
+                  onClick={e => e.stopPropagation()}
+                >
                   {p.githubUrl && (
                     <a
                       href={p.githubUrl}
@@ -120,7 +134,7 @@ export default function Projects() {
               </div>
 
               <div className="relative mt-5 flex flex-wrap gap-2">
-                {p.stack.map((t) => (
+                {p.stack.map(t => (
                   <span
                     key={t}
                     className="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-ink-dim font-mono"
@@ -145,7 +159,7 @@ export default function Projects() {
         >
           <div
             className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto glass p-8 animate-fade-up"
-            onClick={(e) => e.stopPropagation()}
+            onClick={e => e.stopPropagation()}
           >
             <button
               onClick={() => setActive(null)}
@@ -159,7 +173,9 @@ export default function Projects() {
               {active.category}
             </div>
             <div className="eyebrow mb-2">{active.tagline}</div>
-            <h3 className="text-2xl font-semibold text-ink mb-4">{active.title}</h3>
+            <h3 className="text-2xl font-semibold text-ink mb-4">
+              {active.title}
+            </h3>
 
             <p className="text-sm text-ink-dim leading-relaxed">
               {active.details?.overview ?? active.description}
@@ -186,19 +202,26 @@ export default function Projects() {
                   Tech stack
                 </div>
                 <div className="space-y-2">
-                  {Object.entries(active.details.techStack).map(([cat, items]) => (
-                    <div key={cat} className="flex flex-wrap gap-2 items-center">
-                      <span className="text-xs font-mono text-ink-mute w-20">{cat}</span>
-                      {items.map((t) => (
-                        <span
-                          key={t}
-                          className="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-ink-dim font-mono"
-                        >
-                          {t}
+                  {Object.entries(active.details.techStack).map(
+                    ([cat, items]) => (
+                      <div
+                        key={cat}
+                        className="flex flex-wrap gap-2 items-center"
+                      >
+                        <span className="text-xs font-mono text-ink-mute w-20">
+                          {cat}
                         </span>
-                      ))}
-                    </div>
-                  ))}
+                        {items.map(t => (
+                          <span
+                            key={t}
+                            className="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-ink-dim font-mono"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    )
+                  )}
                 </div>
               </div>
             )}

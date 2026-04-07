@@ -75,6 +75,7 @@ git push origin feature/your-feature-name
 #### 3. Committing Changes
 
 Follow conventional commits:
+
 - `feat:` - New feature
 - `fix:` - Bug fix
 - `docs:` - Documentation changes
@@ -84,6 +85,7 @@ Follow conventional commits:
 - `chore:` - Maintenance tasks
 
 Example:
+
 ```bash
 git commit -m "feat: add user authentication"
 git commit -m "fix: resolve login validation issue"
@@ -186,11 +188,13 @@ git commit -m "fix: critical production issue"
 ### VS Code
 
 Recommended extensions:
+
 - ESLint
 - Prettier
 - TypeScript and JavaScript Language Features
 
 Add to `.vscode/settings.json`:
+
 ```json
 {
   "editor.formatOnSave": true,
@@ -200,4 +204,3 @@ Add to `.vscode/settings.json`:
   }
 }
 ```
-

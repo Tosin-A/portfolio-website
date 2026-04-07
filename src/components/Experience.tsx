@@ -1,4 +1,4 @@
-import { profile } from "../data/profile";
+import { profile } from '../data/profile';
 
 type Item = { title: string; org: string; period: string; points: string[] };
 
@@ -6,12 +6,17 @@ function Timeline({ items }: { items: Item[] }) {
   return (
     <div className="relative border-l border-white/10 pl-8 space-y-12">
       {items.map((e, i) => (
-        <div key={i} className="relative reveal" style={{ transitionDelay: `${i * 80}ms` }}>
+        <div
+          key={i}
+          className="relative reveal"
+          style={{ transitionDelay: `${i * 80}ms` }}
+        >
           <span className="absolute -left-[37px] top-1.5 h-3 w-3 rounded-full bg-accent shadow-glow" />
           <span className="absolute -left-[41px] top-[-1px] h-5 w-5 rounded-full bg-accent/30 blur-md" />
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <h3 className="text-lg font-semibold text-ink">
-              {e.title} <span className="text-ink-dim font-normal">· {e.org}</span>
+              {e.title}{' '}
+              <span className="text-ink-dim font-normal">· {e.org}</span>
             </h3>
             <span className="text-xs font-mono text-ink-mute">{e.period}</span>
           </div>

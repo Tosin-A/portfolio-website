@@ -1,4 +1,4 @@
-import { profile } from "../data/profile";
+import { profile } from '../data/profile';
 
 export default function Skills() {
   return (
@@ -22,12 +22,12 @@ export default function Skills() {
                 {group}
               </div>
               <ul className="space-y-2">
-                {items.map((s) => (
+                {items.map(s => (
                   <li
                     key={s}
                     className="text-sm text-ink-dim flex items-center gap-2"
                   >
-                    <span className="text-accent">{">"}</span> {s}
+                    <span className="text-accent">{'>'}</span> {s}
                   </li>
                 ))}
               </ul>

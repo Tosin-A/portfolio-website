@@ -1,9 +1,9 @@
-import { profile } from "../data/profile";
+import { profile } from '../data/profile';
 
 const stats = [
-  { k: "19", v: "Years old" },
-  { k: "5+", v: "Shipped projects" },
-  { k: "∞", v: "Always shipping" },
+  { k: '19', v: 'Years old' },
+  { k: '5+', v: 'Shipped projects' },
+  { k: '∞', v: 'Always shipping' },
 ];
 
 export default function About() {
@@ -13,7 +13,8 @@ export default function About() {
         <div className="md:col-span-2 reveal">
           <div className="eyebrow mb-4">01 / About</div>
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
-            Student by day.<br />
+            Student by day.
+            <br />
             <span className="bg-gradient-to-r from-ink-dim to-accent-glow bg-clip-text text-transparent">
               Founder in training.
             </span>
@@ -26,7 +27,7 @@ export default function About() {
           ))}
 
           <div className="grid grid-cols-3 gap-4 pt-8 border-t border-white/5 mt-8">
-            {stats.map((s) => (
+            {stats.map(s => (
               <div key={s.v} className="glass p-4">
                 <div className="text-2xl font-semibold bg-gradient-to-r from-ink to-accent-glow bg-clip-text text-transparent">
                   {s.k}
