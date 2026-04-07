@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    @apply bg-bg text-ink font-sans;
+    background-image:
+      radial-gradient(800px 500px at 80% -10%, rgba(124, 92, 255, 0.12), transparent 60%),
+      radial-gradient(600px 400px at 0% 10%, rgba(124, 92, 255, 0.06), transparent 60%);
+    background-attachment: fixed;
+  }
+  ::selection {
+    @apply bg-accent/40 text-white;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-6;
+  }
+  .section {
+    @apply py-24 sm:py-32;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-ink-dim;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-200;
+  }
+  .btn-primary {
+    @apply btn bg-accent text-white hover:bg-accent-glow hover:shadow-glow;
+  }
+  .btn-ghost {
+    @apply btn border border-line text-ink hover:border-accent hover:text-accent;
+  }
+  .link-underline {
+    @apply relative after:absolute after:left-0 after:-bottom-0.5 after:h-px after:w-0 after:bg-accent after:transition-all hover:after:w-full;
+  }
+}
