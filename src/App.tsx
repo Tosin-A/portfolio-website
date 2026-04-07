@@ -7,12 +7,16 @@ import Experience from "./components/Experience";
 import Now from "./components/Now";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import Background from "./components/Background";
+import { useReveal } from "./hooks/useReveal";
 
 export default function App() {
+  useReveal();
   return (
     <>
+      <Background />
       <Header />
-      <main>
+      <main className="relative">
         <Hero />
         <About />
         <Projects />

@@ -30,6 +30,7 @@ export const projects: Project[] = [
     liveUrl: "https://coresense.online/",
     githubUrl: "https://github.com/Tosin-A",
     featured: true,
+    category: "Mobile",
     details: {
       overview:
         "CoreSense is a comprehensive AI coaching platform that combines mobile wellness tracking with intelligent conversation. A React Native app surfaces health insights while a Python FastAPI backend (OpenAI-powered) drives personalized coaching conversations.",
@@ -61,6 +62,7 @@ export const projects: Project[] = [
     liveUrl: "https://www.cloutai.co.uk/",
     githubUrl: "https://github.com/Tosin-A",
     featured: true,
+    category: "SaaS",
     details: {
       overview:
         "CloutAI (SocialOptimizer) is a data-driven content analysis platform for creators and agencies. It ingests post-level data from TikTok (primary), Instagram, YouTube, and Facebook, then runs a multi-stage AI pipeline to produce a structured AnalysisReport. Not a scheduler or dashboard, an analysis engine.",
@@ -93,6 +95,7 @@ export const projects: Project[] = [
     liveUrl: "https://www.linkedin.com/in/tosin-adedokun-inspire/overlay/Project/1595449161/treasury/?profileId=ACoAAEPys2cBI94Uij3VBtGoBkGKho_FRtdffok",
     githubUrl: "https://github.com/Tosin-A",
     featured: true,
+    category: "AI",
     details: {
       overview:
         "Calitrack is an AI fitness app built in Python and Kivy that uses MediaPipe and machine learning to track body motion from the camera, count reps, and adapt workout plans to user performance. Shipped as a working prototype across 7 two-week sprint cycles.",
@@ -120,5 +123,6 @@ export const projects: Project[] = [
     stack: ["React", "TypeScript", "OpenAI API"],
     impact: "Used internally to iterate on agent prompts 3x faster.",
     githubUrl: "https://github.com/Tosin-A",
+    category: "Tools",
   },
 ];

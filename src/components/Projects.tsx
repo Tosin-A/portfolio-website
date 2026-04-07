@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
-import { projects, type Project } from "../data/projects";
+import { useEffect, useMemo, useState } from "react";
+import { projects, type Project, type ProjectCategory } from "../data/projects";
+
+const FILTERS: ("All" | ProjectCategory)[] = ["All", "AI", "SaaS", "Mobile", "Tools"];
 
 export default function Projects() {
   const [active, setActive] = useState<Project | null>(null);
+  const [filter, setFilter] = useState<"All" | ProjectCategory>("All");
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setActive(null);
@@ -14,10 +17,15 @@ export default function Projects() {
     document.body.style.overflow = active ? "hidden" : "";
   }, [active]);
 
+  const visible = useMemo(
+    () => (filter === "All" ? projects : projects.filter((p) => p.category === filter)),
+    [filter]
+  );
+
   return (
     <section id="projects" className="section">
       <div className="container-x">
-        <div className="flex items-end justify-between mb-12">
+        <div className="flex items-end justify-between mb-8 reveal">
           <div>
             <div className="eyebrow mb-4">02 / Selected work</div>
             <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
@@ -34,18 +42,43 @@ export default function Projects() {
           </a>
         </div>
 
+        <div className="flex flex-wrap gap-2 mb-10 reveal">
+          {FILTERS.map((f) => {
+            const isActive = filter === f;
+            return (
+              <button
+                key={f}
+                onClick={() => setFilter(f)}
+                className={`text-xs font-mono px-3 py-1.5 rounded-full border transition-all ${
+                  isActive
+                    ? "border-accent bg-accent/10 text-accent shadow-glow"
+                    : "border-white/10 text-ink-dim hover:border-accent/50 hover:text-ink"
+                }`}
+              >
+                {f}
+              </button>
+            );
+          })}
+        </div>
+
         <div className="grid md:grid-cols-2 gap-5">
-          {projects.map((p) => (
+          {visible.map((p, i) => (
             <article
               key={p.title}
               onClick={() => setActive(p)}
               role="button"
               tabIndex={0}
               onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setActive(p)}
-              className="group relative cursor-pointer rounded-2xl border border-line bg-bg-card p-7 transition-all duration-300 hover:border-accent/60 hover:-translate-y-1 hover:shadow-glow focus:outline-none focus:border-accent"
+              className="reveal group relative cursor-pointer glass-card p-7 hover:-translate-y-1 hover:shadow-glow focus:outline-none focus:border-accent overflow-hidden"
+              style={{ transitionDelay: `${i * 60}ms` }}
             >
-              <div className="flex items-start justify-between gap-4">
+              <div className="absolute inset-0 bg-gradient-to-br from-accent/0 via-accent/0 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+
+              <div className="relative flex items-start justify-between gap-4">
                 <div>
+                  <div className="text-[10px] font-mono text-accent/80 uppercase tracking-wider mb-1">
+                    {p.category}
+                  </div>
                   <h3 className="text-xl font-semibold text-ink">{p.title}</h3>
                   <p className="text-xs text-accent mt-1 font-mono">{p.tagline}</p>
                 </div>
@@ -55,8 +88,7 @@ export default function Projects() {
                       href={p.githubUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-xs font-mono px-2 py-1 rounded-md border border-line hover:border-accent hover:text-accent transition"
-                      aria-label="GitHub"
+                      className="text-xs font-mono px-2 py-1 rounded-md border border-white/10 hover:border-accent hover:text-accent transition"
                       title="View on GitHub"
                     >
                       GitHub ↗
@@ -68,7 +100,6 @@ export default function Projects() {
                       target="_blank"
                       rel="noreferrer"
                       className="text-xs font-mono px-2 py-1 rounded-md border border-accent/60 text-accent hover:bg-accent hover:text-bg transition"
-                      aria-label="Open project"
                       title="Open live project"
                     >
                       Visit ↗
@@ -77,29 +108,29 @@ export default function Projects() {
                 </div>
               </div>
 
-              <p className="mt-5 text-sm text-ink-dim leading-relaxed">
+              <p className="relative mt-5 text-sm text-ink-dim leading-relaxed">
                 {p.description}
               </p>
 
-              <div className="mt-5 pt-5 border-t border-line/70">
+              <div className="relative mt-5 pt-5 border-t border-white/5">
                 <div className="text-xs text-ink-mute uppercase tracking-wider mb-2">
                   Impact
                 </div>
                 <p className="text-sm text-ink">{p.impact}</p>
               </div>
 
-              <div className="mt-5 flex flex-wrap gap-2">
+              <div className="relative mt-5 flex flex-wrap gap-2">
                 {p.stack.map((t) => (
                   <span
                     key={t}
-                    className="text-xs px-2.5 py-1 rounded-full bg-bg-elev border border-line text-ink-dim font-mono"
+                    className="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-ink-dim font-mono"
                   >
                     {t}
                   </span>
                 ))}
               </div>
 
-              <div className="mt-5 text-xs font-mono text-ink-mute group-hover:text-accent transition">
+              <div className="relative mt-5 text-xs font-mono text-ink-mute group-hover:text-accent transition">
                 Click for details →
               </div>
             </article>
@@ -109,11 +140,11 @@ export default function Projects() {
 
       {active && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-fade-in"
           onClick={() => setActive(null)}
         >
           <div
-            className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-line bg-bg-card p-8 shadow-glow"
+            className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto glass p-8 animate-fade-up"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -124,6 +155,9 @@ export default function Projects() {
               ✕
             </button>
 
+            <div className="text-[10px] font-mono text-accent/80 uppercase tracking-wider mb-1">
+              {active.category}
+            </div>
             <div className="eyebrow mb-2">{active.tagline}</div>
             <h3 className="text-2xl font-semibold text-ink mb-4">{active.title}</h3>
 
@@ -158,7 +192,7 @@ export default function Projects() {
                       {items.map((t) => (
                         <span
                           key={t}
-                          className="text-xs px-2.5 py-1 rounded-full bg-bg-elev border border-line text-ink-dim font-mono"
+                          className="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-ink-dim font-mono"
                         >
                           {t}
                         </span>
@@ -175,7 +209,7 @@ export default function Projects() {
                   href={active.liveUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="px-4 py-2 rounded-lg bg-accent text-bg text-sm font-medium hover:opacity-90 transition"
+                  className="btn-primary"
                 >
                   Visit site ↗
                 </a>
@@ -185,7 +219,7 @@ export default function Projects() {
                   href={active.githubUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="px-4 py-2 rounded-lg border border-line text-ink-dim text-sm hover:border-accent hover:text-accent transition"
+                  className="btn-ghost"
                 >
                   GitHub
                 </a>
