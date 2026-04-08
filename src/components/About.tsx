@@ -1,42 +1,62 @@
 import { profile } from '../data/profile';
 
-const stats = [
-  { k: '19', v: 'Years old' },
-  { k: '5+', v: 'Shipped projects' },
-  { k: '∞', v: 'Always shipping' },
+const STATS = [
+  { k: '19', v: 'Years on earth' },
+  { k: '5+', v: 'Products shipped' },
+  { k: '7', v: 'Years on stage / sound' },
+  { k: '∞', v: 'Mode: shipping' },
 ];
 
 export default function About() {
   return (
     <section id="about" className="section">
-      <div className="container-x grid md:grid-cols-5 gap-12">
-        <div className="md:col-span-2 reveal">
-          <div className="eyebrow mb-4">01 / About</div>
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
-            Student by day.
-            <br />
-            <span className="bg-gradient-to-r from-ink-dim to-accent-glow bg-clip-text text-transparent">
-              Founder in training.
-            </span>
-          </h2>
+      <div className="wrap">
+        <div className="section-head reveal">
+          <span className="ix">§ 01 — Dossier</span>
+          <span className="ix">{profile.location}</span>
         </div>
 
-        <div className="md:col-span-3 space-y-5 text-ink-dim leading-relaxed reveal">
-          {profile.about.map((p, i) => (
-            <p key={i}>{p}</p>
-          ))}
+        <div className="mt-12 grid grid-cols-12 gap-8 md:gap-12">
+          <div className="col-span-12 md:col-span-5 reveal">
+            <h2 className="display text-[clamp(2.6rem,6vw,5.5rem)]">
+              Student
+              <br />
+              by day.
+              <br />
+              <span className="text-accent">Founder</span>
+              <br />
+              by night.
+            </h2>
+          </div>
 
-          <div className="grid grid-cols-3 gap-4 pt-8 border-t border-white/5 mt-8">
-            {stats.map(s => (
-              <div key={s.v} className="glass p-4">
-                <div className="text-2xl font-semibold bg-gradient-to-r from-ink to-accent-glow bg-clip-text text-transparent">
-                  {s.k}
+          <div className="col-span-12 md:col-span-7 reveal">
+            <div className="space-y-6 text-ink-dim text-base md:text-[17px] leading-[1.7] max-w-[62ch]">
+              {profile.about.map((p, i) => (
+                <p key={i}>
+                  {i === 0 ? (
+                    <>
+                      <span className="float-left font-display text-7xl leading-[0.78] text-accent pr-3 pt-2">
+                        {p.charAt(0)}
+                      </span>
+                      {p.slice(1)}
+                    </>
+                  ) : (
+                    p
+                  )}
+                </p>
+              ))}
+            </div>
+
+            <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 border-t border-line divide-x divide-y sm:divide-y-0 divide-line">
+              {STATS.map(s => (
+                <div key={s.v} className="py-6 px-4 first:pl-0">
+                  <div className="font-display text-5xl md:text-6xl text-ink leading-none">
+                    {s.k}
+                  </div>
+                  <div className="mt-3 ix">{s.v}</div>
                 </div>
-                <div className="text-[10px] uppercase tracking-wider text-ink-mute mt-1">
-                  {s.v}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

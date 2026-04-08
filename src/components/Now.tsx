@@ -1,60 +1,56 @@
-import { lazy, Suspense } from 'react';
 import { profile } from '../data/profile';
 
-const ScrollStack = lazy(() => import('./effects/ScrollStack'));
-const ScrollStackItem = lazy(() =>
-  import('./effects/ScrollStack').then(m => ({ default: m.ScrollStackItem }))
-);
-
 export default function Now() {
+  const stamp = new Date().toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  });
+
   return (
     <section id="now" className="section">
-      <div className="container-x">
-        <div className="reveal">
-          <div className="eyebrow mb-4">
-            <span className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" />
-            06 / Now
-          </div>
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-2">
-            What I'm building right now<span className="text-accent">.</span>
-          </h2>
-          <p className="text-ink-dim mb-8">
-            Scroll through what's on my desk this week.
-          </p>
+      <div className="wrap">
+        <div className="section-head reveal">
+          <span className="ix flex items-center gap-2">
+            <span className="dot animate-blink" />§ 06 — Now
+          </span>
+          <span className="ix">Updated {stamp}</span>
         </div>
 
-        <div className="h-[80vh] glass overflow-hidden">
-          <Suspense
-            fallback={<div className="p-10 text-ink-dim">Loading…</div>}
-          >
-            <ScrollStack
-              itemDistance={80}
-              itemScale={0.04}
-              itemStackDistance={28}
-              baseScale={0.88}
-              rotationAmount={0}
-              blurAmount={1}
-            >
-              {profile.nowBuilding.map((n, i) => (
-                <ScrollStackItem
-                  key={i}
-                  itemClassName="bg-gradient-to-br from-bg-elev to-bg-card border border-white/10 text-ink"
-                >
-                  <div className="flex flex-col h-full justify-between">
-                    <div className="text-xs font-mono text-accent uppercase tracking-wider">
-                      0{i + 1} / Now
-                    </div>
-                    <div className="text-2xl md:text-3xl font-semibold leading-snug max-w-2xl">
-                      {n}
-                    </div>
-                    <div className="text-xs font-mono text-ink-mute">
-                      Tosin Adedokun · {new Date().getFullYear()}
-                    </div>
-                  </div>
-                </ScrollStackItem>
-              ))}
-            </ScrollStack>
-          </Suspense>
+        <h2 className="display text-[clamp(2.6rem,7vw,6rem)] mt-10 reveal">
+          On my desk
+          <br />
+          this week<span className="text-accent">.</span>
+        </h2>
+
+        {/* Terminal log */}
+        <div className="mt-16 border border-line bg-bg-elev/30">
+          <div className="flex items-center gap-2 px-4 py-2 border-b border-line ix">
+            <span className="dot-lg" />
+            <span className="dot-lg !bg-line" />
+            <span className="dot-lg !bg-line" />
+            <span className="ml-3">~/tosin/now.log</span>
+          </div>
+          <div className="p-6 md:p-10 font-mono text-sm md:text-[15px] leading-[1.9]">
+            {profile.nowBuilding.map((n, i) => (
+              <div
+                key={i}
+                className="reveal flex gap-4"
+                style={{ transitionDelay: `${i * 120}ms` }}
+              >
+                <span className="text-ink-mute">
+                  [{String(i + 1).padStart(2, '0')}]
+                </span>
+                <span className="text-accent">$</span>
+                <span className="text-ink">
+                  {n}
+                  {i === profile.nowBuilding.length - 1 && (
+                    <span className="ml-1 inline-block w-2 h-4 bg-accent align-middle animate-blink" />
+                  )}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

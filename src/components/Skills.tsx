@@ -1,36 +1,50 @@
 import { profile } from '../data/profile';
 
 export default function Skills() {
+  const groups = Object.entries(profile.skills);
+
   return (
     <section id="skills" className="section">
-      <div className="container-x">
-        <div className="reveal">
-          <div className="eyebrow mb-4">03 / Toolkit</div>
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-12">
-            The stack I reach for<span className="text-accent">.</span>
-          </h2>
+      <div className="wrap">
+        <div className="section-head reveal">
+          <span className="ix">§ 03 — Toolkit</span>
+          <span className="ix">{groups.length} categories</span>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {Object.entries(profile.skills).map(([group, items], i) => (
+        <h2 className="display text-[clamp(2.6rem,7vw,6rem)] mt-10 max-w-4xl reveal">
+          The stack
+          <br />I reach for<span className="text-accent">.</span>
+        </h2>
+
+        {/* Data ledger */}
+        <div className="mt-16 border-t border-line">
+          {groups.map(([group, items], i) => (
             <div
               key={group}
-              className="reveal glass-card p-6"
+              className="grid grid-cols-12 gap-4 md:gap-8 py-8 border-b border-line reveal items-start"
               style={{ transitionDelay: `${i * 70}ms` }}
             >
-              <div className="text-xs uppercase tracking-wider text-accent font-mono mb-4">
-                {group}
+              <div className="col-span-12 md:col-span-3 flex items-baseline gap-4">
+                <span className="ix">/{String(i + 1).padStart(2, '0')}</span>
+                <span className="font-display text-2xl md:text-3xl text-accent">
+                  {group}
+                </span>
               </div>
-              <ul className="space-y-2">
-                {items.map(s => (
-                  <li
+              <div className="col-span-12 md:col-span-9 flex flex-wrap gap-x-6 gap-y-3 md:pl-8">
+                {items.map((s, j) => (
+                  <span
                     key={s}
-                    className="text-sm text-ink-dim flex items-center gap-2"
+                    className="font-display text-xl md:text-2xl text-ink hover:text-accent transition-colors"
                   >
-                    <span className="text-accent">{'>'}</span> {s}
-                  </li>
+                    {s}
+                    {j < items.length - 1 && (
+                      <span className="text-ink-mute" aria-hidden="true">
+                        {' '}·
+                      </span>
+                    )}
+                  </span>
                 ))}
-              </ul>
+              </div>
             </div>
           ))}
         </div>

@@ -2,7 +2,9 @@ import { useEffect } from 'react';
 
 export function useReveal() {
   useEffect(() => {
-    const els = Array.from(document.querySelectorAll<HTMLElement>('.reveal'));
+    const els = Array.from(
+      document.querySelectorAll<HTMLElement>('.reveal, .reveal-line')
+    );
     if (!('IntersectionObserver' in window)) {
       els.forEach(el => el.classList.add('in'));
       return;

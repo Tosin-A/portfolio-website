@@ -1,4 +1,4 @@
-import PillNav from './components/effects/PillNav';
+import TopBar from './components/TopBar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
@@ -15,23 +15,8 @@ export default function App() {
   return (
     <>
       <Background />
-      <PillNav
-        logo="/logo.svg"
-        logoAlt="Tosin"
-        baseColor="#0a0a0b"
-        pillColor="#a78bfa"
-        hoveredPillTextColor="#ffffff"
-        pillTextColor="#0a0a0b"
-        items={[
-          { label: 'Who I Am', href: '#about' },
-          { label: "What I've Built", href: '#projects' },
-          { label: 'My Stack', href: '#skills' },
-          { label: 'Track Record', href: '#experience' },
-          { label: 'Now', href: '#now' },
-          { label: "Let's Talk", href: '#contact' },
-        ]}
-      />
-      <main className="relative">
+      <TopBar />
+      <main className="relative pt-14">
         <Hero />
         <About />
         <Projects />

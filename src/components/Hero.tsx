@@ -1,69 +1,118 @@
 import { profile } from '../data/profile';
-import BlurText from './effects/BlurText';
+
+const TICKER = [
+  'AI-NATIVE SOFTWARE',
+  'SHIPPED FROM ZERO',
+  'HACKATHON BUILT',
+  'FULL-STACK',
+  'HARDWARE-CURIOUS',
+  'OPEN TO INTERNSHIPS',
+];
 
 export default function Hero() {
   return (
     <section
       id="top"
-      className="relative min-h-[94vh] flex items-center pt-24 overflow-hidden"
+      className="relative pt-12 md:pt-20 pb-20 md:pb-32 overflow-hidden"
     >
-      <div className="container-x relative z-10">
-        <div className="max-w-3xl animate-fade-up">
-          <div className="eyebrow mb-6 glass px-3 py-1.5 rounded-full inline-flex">
-            <span className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" />
-            {profile.location}
-          </div>
-
-          <div className="text-sm font-mono text-accent mb-3 tracking-widest uppercase">
-            {profile.name}
-          </div>
-
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-semibold tracking-tight leading-[1.05] text-ink">
-            <BlurText
-              text="Building AI-native software."
-              delay={120}
-              animateBy="words"
-              direction="top"
-            />
-            <span className="text-ink-dim block mt-2">
-              <BlurText
-                text="Shipping fast. Learning faster."
-                delay={90}
-                animateBy="words"
-                direction="bottom"
-              />
-            </span>
-          </h1>
-
-          <p className="mt-8 text-lg text-ink-dim max-w-2xl leading-relaxed">
-            {profile.heroStatement}
-          </p>
-
-          <div className="mt-10 flex flex-wrap items-center gap-3">
-            <a href="#projects" className="btn-primary">
-              See my work →
-            </a>
-            <a href="#contact" className="btn-ghost">
-              Get in touch
-            </a>
-          </div>
-
-          <div className="mt-14 flex flex-wrap gap-3">
-            {['AI', 'Full-stack', 'Hardware-curious', 'Hackathons'].map(t => (
-              <span
-                key={t}
-                className="text-xs font-mono px-3 py-1.5 rounded-full glass text-ink-dim"
-              >
-                {t}
-              </span>
-            ))}
-          </div>
+      {/* Top meta strip */}
+      <div className="wrap">
+        <div className="section-head">
+          <span className="ix">EST. 2006 · LONDON</span>
+          <span className="ix hidden sm:inline">VOL. 01 / ED. 04</span>
+          <span className="ix">FILE — INDEX.HTML</span>
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-ink-mute text-xs tracking-widest animate-fade-in flex flex-col items-center gap-2 z-10">
-        <span>SCROLL</span>
-        <span className="h-8 w-px bg-gradient-to-b from-accent to-transparent" />
+      {/* Hero grid */}
+      <div className="wrap mt-10 md:mt-16 grid grid-cols-12 gap-6 md:gap-10">
+        {/* Left meta column */}
+        <aside className="col-span-12 md:col-span-3 grid grid-cols-3 md:grid-cols-1 md:justify-between gap-6">
+          <div>
+            <div className="ix">Subject</div>
+            <div className="mt-1 ix-ink">{profile.name}</div>
+          </div>
+          <div>
+            <div className="ix">Role</div>
+            <div className="mt-1 ix-ink">AI · Full-Stack · Founder</div>
+          </div>
+          <div>
+            <div className="ix">Status</div>
+            <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.16em] text-accent flex items-center gap-2">
+              <span className="dot" /> Open
+            </div>
+          </div>
+        </aside>
+
+        {/* Headline */}
+        <div className="col-span-12 md:col-span-7">
+          <h1 className="display text-ink text-[clamp(3.5rem,11vw,11.5rem)]">
+            <span className="reveal-line">BUILD</span>
+            <span
+              className="reveal-line"
+              style={{ transitionDelay: '140ms' }}
+            >
+              SHIP<span className="text-accent">.</span>
+            </span>
+            <span
+              className="reveal-line text-ink-dim"
+              style={{ transitionDelay: '280ms' }}
+            >
+              REPEAT.
+            </span>
+          </h1>
+
+          <div className="mt-10 grid sm:grid-cols-2 gap-8 items-end">
+            <p className="text-ink-dim text-base md:text-lg leading-relaxed max-w-md reveal">
+              {profile.heroStatement}
+            </p>
+            <div className="flex flex-wrap gap-3 reveal sm:justify-end">
+              <a href="#projects" className="btn-solid">
+                See the work →
+              </a>
+              <a href="#contact" className="btn-line">
+                Hire me
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Portrait — editorial mug shot, hairline + caption */}
+        <figure className="hidden md:flex col-span-2 flex-col self-end reveal" style={{ transitionDelay: '420ms' }}>
+          <span className="rule mb-3" aria-hidden="true" />
+          <img
+            src="/portrait.png"
+            alt="Tosin Adedokun, photographed in London, 2026"
+            loading="eager"
+            decoding="async"
+            className="portrait-img w-full h-auto select-none"
+            draggable={false}
+          />
+          <figcaption className="mt-3 ix flex items-center justify-between">
+            <span>FIG. 01</span>
+            <span>LDN · 2026</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      {/* Ticker / marquee strip — full bleed, alternating fill/outline */}
+      <div
+        className="bleed mt-20 md:mt-32 border-y border-line overflow-hidden"
+        aria-hidden="true"
+      >
+        <div className="marquee-track animate-marquee py-5">
+          {[...TICKER, ...TICKER, ...TICKER, ...TICKER].map((t, i) => (
+            <span
+              key={i}
+              className={`flex items-center gap-7 px-7 font-display tracking-tight text-3xl md:text-5xl whitespace-nowrap ${
+                i % 2 === 0 ? 'display-outline' : 'text-ink'
+              }`}
+            >
+              {t}
+              <span className="text-accent">★</span>
+            </span>
+          ))}
+        </div>
       </div>
     </section>
   );

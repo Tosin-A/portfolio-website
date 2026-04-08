@@ -2,32 +2,39 @@ import { profile } from '../data/profile';
 
 type Item = { title: string; org: string; period: string; points: string[] };
 
-function Timeline({ items }: { items: Item[] }) {
+function Ledger({ items }: { items: Item[] }) {
   return (
-    <div className="relative border-l border-white/10 pl-8 space-y-12">
+    <div className="border-t border-line">
       {items.map((e, i) => (
-        <div
+        <article
           key={i}
-          className="relative reveal"
+          className="grid grid-cols-12 gap-4 md:gap-8 py-10 border-b border-line reveal"
           style={{ transitionDelay: `${i * 80}ms` }}
         >
-          <span className="absolute -left-[37px] top-1.5 h-3 w-3 rounded-full bg-accent shadow-glow" />
-          <span className="absolute -left-[41px] top-[-1px] h-5 w-5 rounded-full bg-accent/30 blur-md" />
-          <div className="flex flex-wrap items-baseline justify-between gap-2">
-            <h3 className="text-lg font-semibold text-ink">
-              {e.title}{' '}
-              <span className="text-ink-dim font-normal">· {e.org}</span>
-            </h3>
-            <span className="text-xs font-mono text-ink-mute">{e.period}</span>
+          <div className="col-span-12 md:col-span-3">
+            <div className="ix">{e.period}</div>
+            <div className="ix mt-2 !text-accent">
+              /{String(i + 1).padStart(2, '0')}
+            </div>
           </div>
-          <ul className="mt-3 space-y-1.5 text-sm text-ink-dim">
-            {e.points.map((p, j) => (
-              <li key={j} className="flex gap-2">
-                <span className="text-accent">›</span> {p}
-              </li>
-            ))}
-          </ul>
-        </div>
+          <div className="col-span-12 md:col-span-9">
+            <h3 className="display text-3xl md:text-4xl text-ink">
+              {e.title}
+            </h3>
+            <div className="ix-dim mt-1">{e.org}</div>
+            <ul className="mt-5 space-y-2 max-w-[62ch]">
+              {e.points.map((p, j) => (
+                <li
+                  key={j}
+                  className="flex gap-3 text-ink-dim text-[15px] leading-relaxed"
+                >
+                  <span className="ix !text-accent pt-1.5">▸</span>
+                  <span>{p}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </article>
       ))}
     </div>
   );
@@ -36,24 +43,32 @@ function Timeline({ items }: { items: Item[] }) {
 export default function Experience() {
   return (
     <section id="experience" className="section">
-      <div className="container-x">
-        <div className="reveal">
-          <div className="eyebrow mb-4">04 / Track record</div>
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-12">
-            Experience<span className="text-accent">.</span>
-          </h2>
+      <div className="wrap">
+        <div className="section-head reveal">
+          <span className="ix">§ 04 — Track Record</span>
+          <span className="ix">Receipts</span>
         </div>
 
-        <Timeline items={profile.experience} />
+        <h2 className="display text-[clamp(2.6rem,7vw,6rem)] mt-10 reveal">
+          Experience<span className="text-accent">.</span>
+        </h2>
 
-        <div className="reveal">
-          <div className="eyebrow mt-20 mb-4">05 / Education</div>
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-12">
-            Education<span className="text-accent">.</span>
-          </h2>
+        <div className="mt-12">
+          <Ledger items={profile.experience} />
         </div>
 
-        <Timeline items={profile.education} />
+        <div className="mt-28 flex items-baseline justify-between border-b border-line pb-4 reveal">
+          <span className="ix">§ 05 — Education</span>
+          <span className="ix">Formal &amp; Self-directed</span>
+        </div>
+
+        <h2 className="display text-[clamp(2.6rem,7vw,6rem)] mt-10 reveal">
+          Education<span className="text-accent">.</span>
+        </h2>
+
+        <div className="mt-12">
+          <Ledger items={profile.education} />
+        </div>
       </div>
     </section>
   );

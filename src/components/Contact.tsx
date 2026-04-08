@@ -15,92 +15,98 @@ export default function Contact() {
     window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
   };
 
+  const field =
+    'w-full bg-transparent border-b border-line py-4 text-ink placeholder:text-ink-mute focus:outline-none';
+
   return (
     <section id="contact" className="section">
-      <div className="container-x max-w-3xl mx-auto reveal">
-        <div className="glass p-10 md:p-14 text-center relative overflow-hidden">
-          <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-72 w-72 rounded-full bg-accent/20 blur-3xl" />
+      <div className="wrap">
+        <div className="section-head reveal">
+          <span className="ix">§ 07 — Contact</span>
+          <span className="ix">Reply guaranteed</span>
+        </div>
 
-          <div className="relative">
-            <div className="eyebrow mb-4 justify-center">07 / Contact</div>
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight leading-tight">
-              Got a hard problem?{' '}
-              <span className="bg-gradient-to-r from-ink-dim to-accent-glow bg-clip-text text-transparent">
-                Let's build.
-              </span>
+        <div className="grid grid-cols-12 gap-8 md:gap-12 mt-12">
+          <div className="col-span-12 md:col-span-6 reveal">
+            <h2 className="display text-[clamp(3rem,9vw,8rem)]">
+              Got a hard
+              <br />
+              problem<span className="text-accent">?</span>
+              <br />
+              Let&apos;s
+              <br />
+              build.
             </h2>
-            <p className="mt-6 text-ink-dim">
-              I'm open to internships, collaborations, and interesting
-              conversations with people building the future.
+
+            <p className="mt-8 text-ink-dim text-base md:text-lg max-w-md leading-relaxed">
+              I&apos;m open to internships, founding-engineer roles,
+              collaborations, and interesting conversations with people
+              building the future.
             </p>
 
-            <form
-              onSubmit={onSubmit}
-              className="mt-10 grid gap-3 text-left max-w-xl mx-auto"
-            >
-              <div className="grid sm:grid-cols-2 gap-3">
-                <input
-                  required
-                  value={name}
-                  onChange={e => setName(e.target.value)}
-                  placeholder="Your name"
-                  className="glass px-4 py-3 text-sm text-ink placeholder:text-ink-mute focus:outline-none focus:border-accent"
-                />
-                <input
-                  required
-                  type="email"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  placeholder="Your email"
-                  className="glass px-4 py-3 text-sm text-ink placeholder:text-ink-mute focus:outline-none focus:border-accent"
-                />
-              </div>
+            <ul className="mt-10 space-y-3">
+              {[
+                { k: 'Email', v: profile.email, href: `mailto:${profile.email}` },
+                { k: 'GitHub', v: '@Tosin-A', href: profile.social.github },
+                { k: 'LinkedIn', v: 'Tosin Adedokun', href: profile.social.linkedin },
+                { k: 'X', v: '@yxng_tosin', href: profile.social.twitter },
+              ].map(({ k, v, href }) => (
+                <li key={k} className="flex items-center gap-3">
+                  <span className="ix w-16">{k}</span>
+                  <a
+                    href={href}
+                    target={href.startsWith('http') ? '_blank' : undefined}
+                    rel="noreferrer"
+                    className="ix-ink ul-link"
+                  >
+                    {v}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <form
+            onSubmit={onSubmit}
+            className="col-span-12 md:col-span-6 reveal flex flex-col border-t border-line"
+          >
+            <label className="block field-wrap pt-4">
+              <span className="ix">/01 Name</span>
+              <input
+                required
+                value={name}
+                onChange={e => setName(e.target.value)}
+                placeholder="Your name"
+                className={field}
+              />
+            </label>
+            <label className="block field-wrap pt-4">
+              <span className="ix">/02 Email</span>
+              <input
+                required
+                type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="you@domain.com"
+                className={field}
+              />
+            </label>
+            <label className="block field-wrap pt-4">
+              <span className="ix">/03 What are you building?</span>
               <textarea
                 required
                 value={msg}
                 onChange={e => setMsg(e.target.value)}
-                placeholder="What are you building?"
-                rows={4}
-                className="glass px-4 py-3 text-sm text-ink placeholder:text-ink-mute focus:outline-none focus:border-accent resize-none"
+                placeholder="Tell me about it"
+                rows={5}
+                className={`${field} resize-none`}
               />
-              <button
-                type="submit"
-                className="btn-primary justify-self-start mt-2"
-              >
-                Send message →
-              </button>
-            </form>
+            </label>
 
-            <div className="mt-10 flex flex-wrap justify-center gap-3">
-              <a href={`mailto:${profile.email}`} className="btn-ghost">
-                {profile.email}
-              </a>
-              <a
-                href={profile.social.github}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-ghost"
-              >
-                GitHub
-              </a>
-              <a
-                href={profile.social.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-ghost"
-              >
-                LinkedIn
-              </a>
-              <a
-                href={profile.social.twitter}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-ghost"
-              >
-                Twitter
-              </a>
-            </div>
-          </div>
+            <button type="submit" className="btn-solid mt-10 self-start">
+              Send transmission →
+            </button>
+          </form>
         </div>
       </div>
     </section>
