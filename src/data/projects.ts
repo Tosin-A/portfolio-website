@@ -107,7 +107,7 @@ export const projects: Project[] = [
     impact: 'Counts reps and corrects form from the camera feed in real time.',
     liveUrl:
       'https://www.linkedin.com/in/tosin-adedokun-inspire/overlay/Project/1595449161/treasury/?profileId=ACoAAEPys2cBI94Uij3VBtGoBkGKho_FRtdffok',
-    githubUrl: 'https://github.com/Tosin-A',
+    githubUrl: 'https://github.com/Tosin-A/Workout-app',
     featured: true,
     category: 'AI',
     details: {
@@ -130,13 +130,31 @@ export const projects: Project[] = [
     },
   },
   {
-    title: 'Prompt Lab',
-    tagline: 'LLM prompt playground',
+    title: 'Tradingalgz',
+    tagline: 'ICT/SMC + ML futures trading system',
     description:
-      'A minimal workspace to test, version, and diff prompts across models. Built for speed over polish.',
-    stack: ['React', 'TypeScript', 'OpenAI API'],
-    impact: 'Used internally to iterate on agent prompts 3x faster.',
-    githubUrl: 'https://github.com/Tosin-A',
-    category: 'Tools',
+      'Algorithmic futures trading system for NQ/ES, combining an ICT/SMC rule-based strategy with ML-driven signal filtering. Includes a backtesting engine, live execution via Alpaca, and a FastAPI web dashboard.',
+    stack: ['Python', 'PyTorch', 'XGBoost', 'FastAPI', 'Alpaca API', 'pandas'],
+    impact: 'Rule-based ICT/SMC signals filtered by ML, executed live on Alpaca.',
+    githubUrl: 'https://github.com/Tosin-A/Tradingalgz',
+    category: 'AI',
+    details: {
+      overview:
+        'Algorithmic futures trading system for NQ/ES, combining an ICT/SMC (Inner Circle Trader / Smart Money Concepts) rule-based strategy with ML-driven signal filtering. Includes a backtesting engine, live execution via Alpaca, and a FastAPI web dashboard.',
+      highlights: [
+        'ICT/SMC engine: market structure, order blocks, fair value gaps, liquidity sweeps, HTF bias, killzone sessions',
+        'ML signal filter using PyTorch and XGBoost models for trade classification',
+        'Historical OHLCV backtests with trade logging and risk management',
+        'Real-time live execution engine integrated with the Alpaca brokerage API',
+        'FastAPI + static frontend dashboard for running and visualizing backtests',
+        'Position sizing and risk controls with modular execution layer',
+      ],
+      techStack: {
+        Core: ['Python', 'pandas', 'scikit-learn'],
+        ML: ['PyTorch', 'XGBoost'],
+        Web: ['FastAPI'],
+        Broker: ['Alpaca API'],
+      },
+    },
   },
 ];
