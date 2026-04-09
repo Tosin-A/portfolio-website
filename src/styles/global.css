@@ -20,7 +20,7 @@
     font-feature-settings: 'ss01', 'ss02', 'cv11';
   }
   ::selection {
-    background: #f7d046;
+    background: #d97757;
     color: #0c0c0a;
   }
   /* Scrollbar — warm dark, hairline */
@@ -36,7 +36,7 @@
     border: 2px solid #0c0c0a;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #f7d046;
+    background: #d97757;
   }
   html {
     scrollbar-color: #2a2925 #0c0c0a;
@@ -44,7 +44,7 @@
   }
   /* Visible focus for keyboard users */
   :focus-visible {
-    outline: 2px solid #f7d046;
+    outline: 2px solid #d97757;
     outline-offset: 3px;
   }
   /* Body links inherit, no underline by default */
@@ -85,10 +85,28 @@
     color: transparent;
     -webkit-text-stroke: 1px theme('colors.line');
   }
-  /* Editorial portrait — warm tint, no chrome */
+  /* Portrait crop — waist-up framing, taller than wide */
+  .portrait-crop {
+    aspect-ratio: 3 / 4;
+  }
   .portrait-img {
-    filter: grayscale(0.18) contrast(1.04) brightness(0.96);
-    mix-blend-mode: normal;
+    object-fit: cover;
+    object-position: center 18%;
+    /* Dark-theme grading tuned to pair with terracotta accent */
+    filter: grayscale(0.28) contrast(1.08) brightness(0.84) sepia(0.14) hue-rotate(-8deg);
+  }
+  /* Gradient fade — bottom quarter dissolves into page bg */
+  .portrait-fade {
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 42%;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(12, 12, 10, 0) 0%,
+      rgba(12, 12, 10, 0.55) 55%,
+      rgba(12, 12, 10, 1) 100%
+    );
   }
   /* Full-bleed escape from .wrap */
   .bleed {
@@ -180,9 +198,15 @@
   /* Status dot */
   .dot {
     @apply inline-block h-1.5 w-1.5 bg-accent;
+    animation: dot-pulse 2.4s ease-in-out infinite;
   }
   .dot-lg {
     @apply inline-block h-2 w-2 bg-accent;
+    animation: dot-pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes dot-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.45; transform: scale(0.82); }
   }
 }
 
@@ -287,8 +311,8 @@
 /* Background grid (subtle, warm) */
 .bg-grid {
   background-image:
-    linear-gradient(to right, rgba(247, 208, 70, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(247, 208, 70, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(217, 119, 87, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(217, 119, 87, 0.05) 1px, transparent 1px);
   background-size: 80px 80px;
   background-position: -1px -1px;
 }

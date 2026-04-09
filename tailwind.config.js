@@ -10,7 +10,7 @@ export default {
         mono: ['"Azeret Mono"', 'ui-monospace', 'monospace'],
       },
       colors: {
-        // Warm near-black canvas, cream ink, hi-vis yellow accent
+        // Warm near-black canvas, cream ink, Claude terracotta accent
         bg: {
           DEFAULT: '#0c0c0a',
           elev: '#131310',
@@ -22,8 +22,8 @@ export default {
           mute: '#6a675d',
         },
         accent: {
-          DEFAULT: '#f7d046', // hi-vis yellow
-          hot: '#ff5b2e',     // vermillion (rare pop)
+          DEFAULT: '#d97757', // Claude terracotta (was #f7d046 yellow)
+          hot: '#bc5a35',     // deep clay (rare pop)
         },
         line: '#2a2925',
       },
