@@ -6,10 +6,28 @@ export default function Hero() {
       id="top"
       className="relative pt-16 md:pt-28 pb-24 md:pb-36 overflow-hidden"
     >
-      <div className="wrap grid grid-cols-12 gap-6 md:gap-10">
-        {/* Headline */}
-        <div className="col-span-12 md:col-span-8">
-          <h1 className="display text-ink text-[clamp(3.25rem,10vw,10.5rem)]">
+      {/* Portrait — atmospheric background layer, sits behind the headline */}
+      <div
+        className="hero-portrait hidden md:block absolute inset-y-0 right-0 w-[58%] lg:w-[52%] pointer-events-none reveal"
+        aria-hidden="true"
+        style={{ transitionDelay: '200ms' }}
+      >
+        <img
+          src="/portrait.png"
+          alt=""
+          width={607}
+          height={974}
+          loading="eager"
+          decoding="async"
+          className="hero-portrait-img absolute inset-0 w-full h-full select-none"
+          draggable={false}
+        />
+      </div>
+
+      <div className="wrap relative z-10 grid grid-cols-12 gap-6 md:gap-10">
+        {/* Headline — foreground, over the portrait */}
+        <div className="col-span-12 md:col-span-10">
+          <h1 className="display text-ink text-[clamp(3.25rem,11vw,11rem)] relative">
             <span className="reveal-line">BUILD</span>
             <span
               className="reveal-line"
@@ -26,30 +44,6 @@ export default function Hero() {
           </h1>
         </div>
 
-        {/* Portrait — waist-up crop, baseline-anchored, fades into bg */}
-        <figure
-          className="hidden md:block col-span-4 self-end reveal"
-          style={{ transitionDelay: '520ms' }}
-        >
-          <div className="portrait-crop relative w-full overflow-hidden">
-            <img
-              src="/portrait.png"
-              alt="Tosin Adedokun, photographed in London, 2026"
-              width={607}
-              height={974}
-              loading="eager"
-              decoding="async"
-              className="portrait-img absolute inset-0 w-full h-full select-none"
-              draggable={false}
-            />
-            <div className="portrait-fade" aria-hidden="true" />
-          </div>
-          <figcaption className="mt-3 pb-4 border-b border-line ix flex items-center justify-between">
-            <span>FIG. 01</span>
-            <span>LDN · 2026</span>
-          </figcaption>
-        </figure>
-
         {/* Statement + CTAs — column-aligned with headline */}
         <div className="col-span-12 md:col-span-8 mt-8 md:mt-12 grid sm:grid-cols-5 gap-6 md:gap-8 items-end">
           <p
@@ -63,11 +57,11 @@ export default function Hero() {
             style={{ transitionDelay: '460ms' }}
           >
             <a href="#projects" className="btn-solid">
-              See the work <span aria-hidden="true">→</span>
+              See the work<span aria-hidden="true">→</span>
             </a>
             <a
               href="#contact"
-              className="ul-link font-mono text-[12px] uppercase tracking-[0.16em] text-ink-dim hover:text-ink transition-colors"
+              className="ul-link inline-flex items-center py-3 font-mono text-[12px] uppercase tracking-[0.16em] text-ink-dim hover:text-ink transition-colors"
             >
               Or hire me
             </a>
