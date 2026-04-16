@@ -130,6 +130,34 @@ export const projects: Project[] = [
     },
   },
   {
+    title: 'RAG Hybrid',
+    tagline: 'Local hybrid retrieval-augmented generation pipeline',
+    description:
+      'Fully local RAG pipeline that indexes a text corpus with both dense (Chroma + sentence-transformers) and sparse (BM25) retrievers, fuses results via Reciprocal Rank Fusion, and answers questions through a local Ollama/Mistral model.',
+    stack: ['Python', 'Chroma', 'BM25', 'sentence-transformers', 'Ollama', 'Mistral'],
+    impact: 'Zero cloud dependency — embeddings, retrieval, and generation run entirely on-device.',
+    githubUrl: 'https://github.com/Tosin-A/rag-hybrid',
+    category: 'AI',
+    details: {
+      overview:
+        'RAG Hybrid is a local Retrieval-Augmented Generation pipeline with no cloud or API dependencies. A text corpus is chunked with overlap and indexed twice: semantically via Chroma + sentence-transformers (all-MiniLM-L6-v2) for meaning-based recall, and lexically via BM25 for exact/rare-term recall. The two ranked lists are merged with Reciprocal Rank Fusion (RRF), and the top passages are fed as context to a local Ollama Mistral model that answers using only retrieved content.',
+      highlights: [
+        'Dual-index architecture: dense (Chroma cosine embeddings) + sparse (BM25) run in parallel on every query',
+        'Reciprocal Rank Fusion merges both ranked lists without manual weight tuning (∑ 1/(k + rank))',
+        'Overlapping chunker preserves continuity across segment boundaries (~400 char chunks, ~80 overlap)',
+        'Fully offline after first embed-model download — no OpenAI, no external APIs',
+        'Modular CLI: ingest.py builds indexes, search.py debugs retrieval alone, app.py runs the full REPL',
+        'Typed Hit objects with per-list ranks and fused scores for introspection and debugging',
+        'Persistent indexes on disk (.index/) — re-ingest only when corpus changes',
+      ],
+      techStack: {
+        Retrieval: ['Chroma', 'BM25', 'sentence-transformers'],
+        Generation: ['Ollama', 'Mistral'],
+        Core: ['Python 3'],
+      },
+    },
+  },
+  {
     title: 'Tradingalgz',
     tagline: 'ICT/SMC + ML futures trading system',
     description:
