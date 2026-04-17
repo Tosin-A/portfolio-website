@@ -63,7 +63,6 @@ export default function TopBar() {
             T
           </span>
           <span className="hidden sm:inline">Tosin&nbsp;Adedokun</span>
-          <span className="hidden md:inline ix">— {profile.role}</span>
         </a>
 
         <nav className="hidden lg:flex items-center gap-7">
@@ -87,6 +86,14 @@ export default function TopBar() {
             available
           </span>
           <span className="ix">{time}</span>
+          <a
+            href={profile.resumeUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="btn-line py-1.5 px-3 text-[10px]"
+          >
+            Résumé ↗
+          </a>
         </div>
 
         <button
@@ -123,6 +130,14 @@ export default function TopBar() {
               <span className="ix">{item.n}</span>
             </a>
           ))}
+          <a
+            href={profile.resumeUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="btn-line w-fit mt-6"
+          >
+            Résumé ↗
+          </a>
         </nav>
       </div>
     </header>
