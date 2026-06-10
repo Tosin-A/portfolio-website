@@ -21,6 +21,45 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: '006 / Drift',
+    tagline: 'Adversarial AI governance layer for autonomous spending agents',
+    description:
+      '006 sits between an AI spending agent and the payment rail. It intercepts each transaction, reconstructs the user’s original intent from the basket, merchant, and fees, then adversarially interrogates the agent’s decision and returns a verdict: approve, modify, escalate, or deny.',
+    stack: [
+      'Next.js 14',
+      'TypeScript',
+      'Tailwind CSS',
+      'Groq (Llama 3.3 70B)',
+      'PostgreSQL',
+      'Prisma',
+      'SSE',
+    ],
+    impact:
+      '1st place — Move 37 Student Competition (Build Track), Imperial College London, London Tech Week 2026.',
+    githubUrl: 'https://github.com/Tosin-A/006',
+    featured: true,
+    category: 'AI',
+    details: {
+      overview:
+        '006 sits between an AI spending agent and the payment rail. Before money moves, it intercepts the transaction, reconstructs what the user originally intended using only the basket, merchant, and fees, then runs an adversarial interrogation of the agent’s decision and scores its answers. The verdict is approve, modify, escalate, or deny. It targets two failure modes existing guardrails miss: intent drift, where an agent quietly pads a transaction beyond what the user asked for, and prompt injection, where malicious instructions are hidden inside a normal-looking request. The key design decision is that 006 ignores the agent’s self-reported reasoning entirely and treats the transaction itself as the evidence.',
+      highlights: [
+        '1st place, Move 37 Student Competition (Build Track), Imperial College London — London Tech Week 2026',
+        'Adversarial interrogation layer: reconstructs intent from basket + merchant + fees, never trusts the agent’s own explanation',
+        'Catches intent drift — e.g. an eggs order silently padded with priority delivery, tip, and handling fees on a £15 budget',
+        'Catches prompt injection — e.g. a pasta-shop request hiding an instruction to wire £200 elsewhere',
+        'Four-way verdict engine: approve, modify, escalate, or deny, sitting in front of the payment rail',
+        'Real-time reasoning streamed to the UI over Server-Sent Events as each interrogation step resolves',
+        'Groq-hosted Llama 3.3 70B Versatile for low-latency adversarial scoring; Prisma + PostgreSQL for transaction + verdict history',
+      ],
+      techStack: {
+        Frontend: ['Next.js 14', 'TypeScript', 'Tailwind CSS'],
+        AI: ['Groq', 'Llama 3.3 70B Versatile'],
+        Data: ['PostgreSQL', 'Prisma'],
+        Realtime: ['Server-Sent Events'],
+      },
+    },
+  },
+  {
     title: 'Coresense',
     tagline: 'AI coaching & wellness platform',
     description:
