@@ -48,23 +48,23 @@ export const profile = {
   } as Record<string, string[]>,
   experience: [
     {
-      title: 'Swim Teacher',
-      org: 'Downham Health & Leisure Centre',
-      period: 'Sep 2025 - Present',
+      title: 'PwC — Technology Work Experience',
+      org: 'PwC UK',
+      period: 'Jun 2024 - Jul 2024',
       points: [
-        'Plan and deliver structured sessions, adapting teaching methods per learner using a feedback-driven, iterative approach.',
-        'Collaborate with other instructors to assess progress and communicate feedback to students and parents.',
-        'Build confidence and discipline in learners while running creative drills in a safe, supportive environment.',
+        'Analysed structured test datasets in a simulated enterprise environment, tracing root causes of inconsistencies and anomalies that were degrading database accuracy and reporting reliability.',
+        'Produced visual summaries — pie charts and categorised data views — to surface trends for non-technical stakeholders and make large datasets easier to interpret.',
+        'Gained exposure to data governance and validation workflows, collaborating on problem-solving challenges around data integrity, business-rule enforcement, and consistency across interconnected tables.',
       ],
     },
     {
-      title: 'Lifeguard',
-      org: 'Downham Health & Leisure Centre',
-      period: 'Oct 2023 - Present',
+      title: 'Founder, Tutor',
+      org: 'ADEX Tutors',
+      period: 'Sep 2025 - Present',
       points: [
-        'Administered first aid for nosebleeds, cuts, and bruises while overseeing pool safety and customer experience.',
-        'Mitigated hazards and responded to emergencies in a fast-paced, high-pressure environment.',
-        'Coordinated with peers to triage high- and low-priority tasks throughout each shift.',
+        'Founded and scaled an independent tutoring initiative delivering GCSE and A-Level support in Mathematics, Mechanics, and Computer Science — managing onboarding, scheduling, lesson planning, and progress tracking end-to-end.',
+        'Designed exam-focused lesson frameworks tailored to each student’s weaknesses, breaking down topics like mechanics modelling, algorithms, and problem-solving strategies into clear, step-by-step methods.',
+        'Built and retained a consistent student base through referrals, running structured assessments and regular parent updates, and adapting teaching to improve confidence, exam technique, and outcomes.',
       ],
     },
     {
